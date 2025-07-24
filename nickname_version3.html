@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>랜덤 닉네임 생성기</title>
+  <style>
+    body {
+      font-family: 'system-ui', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      background-color: #fefefe;
+      color: #333;
+    }
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+    select, button {
+      font-size: 1em;
+      padding: 10px;
+      margin: 10px;
+      width: 80%;
+      max-width: 300px;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+    }
+    button {
+      background-color: #5a8dee;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3d6edb;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 1.5em;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <h1>랜덤 닉네임 생성기</h1>
+
+  <select id="category">
+    <option value="person">인물</option>
+    <option value="animal">동물</option>
+    <option value="objects">사물</option>
+  </select>
+
+  <button onclick="generateNickname()">닉네임 생성</button>
+
+  <div id="result">여기에 닉네임이 나타납니다</div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const verbs = ['노래하는', '달리는', '웃는', '청소하는', '기도하는', '낚시하는', '춤추는', '공부하는', '무서운', '사랑에 빠진', '느긋한', '수줍은', '당당한', '용감한', '혼잣말하는', '도망치는', '하품하는', '날아가는', '연주하는'];
+
+        const nouns = {
+          person: ['베드로', '마리아', '엘리야', '다윗', '솔로몬', '목동', '선생님', '왕자', '공주', '학생', '박사', '김예경', '박민정', '김이경', '박소희', '최서린', '김혜원', '유다영', '허정안'],
+          animal: ['여우', '호랑이', '오소리', '하마', '고양이', '돌고래', '오징어', '강아지', '펭귄', '사자', '토끼', '코끼리', '다람쥐', '문어', '거북이', '개구리'],
+          objects: ['단추', '양초', '가방', '나뭇잎', '시계', '콘센트', '컵', '세탁기', '옷걸이', '청소기', '삽', '주걱', '수세미']
+        };
+
+        function generateNickname() {
+          const category = document.getElementById('category').value;
+          const verb = verbs[Math.floor(Math.random() * verbs.length)];
+          const nounList = nouns[category];
+          const noun = nounList[Math.floor(Math.random() * nounList.length)];
+          document.getElementById('result').innerText = `${verb} ${noun}`;
+        }
+
+        const button = document.querySelector('button');
+        button.addEventListener('click', generateNickname);
+        button.addEventListener('touchstart', generateNickname);
+    });
+  </script>
+</body>
+</html>
